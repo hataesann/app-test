@@ -1,6 +1,6 @@
 # Express Typescript Template
 
-## 依存パッケージ
+## 依存パッケージ！
 
 > dependencies
 
