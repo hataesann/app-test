@@ -1,6 +1,13 @@
+import mongoose from 'mongoose';
 import { app } from './app';
 
 const start = async () => {
+  try {
+    await mongoose.connect('mongodb://mongo:mongo@192.168.24.103', {});
+  } catch (e) {
+    console.error(e);
+  }
+
   // ENVのチェックを行う。
   if (!process.env.NODE_ENV) {
     console.log(process.env.NODE_ENV);
@@ -12,8 +19,8 @@ const start = async () => {
   } catch (e) {}
 
   // express server 起動
-  app.listen(3000, () => {
-    console.log('Listening on port 3000');
+  app.listen(4000, () => {
+    console.log('Listening on port 4000');
   });
 };
 
