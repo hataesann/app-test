@@ -1,9 +1,12 @@
 import mongoose from 'mongoose';
 import { app } from './app';
+import { User } from './db/mongodb';
 
 const start = async () => {
   try {
     await mongoose.connect('mongodb://mongo:mongo@192.168.24.103', {});
+    console.log(await User.find());
+    //await User.remove({ useName: 'miya', password: '99999' });
   } catch (e) {
     console.error(e);
   }

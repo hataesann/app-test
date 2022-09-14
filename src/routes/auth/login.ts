@@ -2,7 +2,7 @@ import express from 'express';
 import { body } from 'express-validator';
 import jwt = require('jsonwebtoken');
 import { User } from '../../db/mongodb';
-import { NotFoundError } from '../../errors/not-found-error';
+import { UnauthorizedError } from '../../errors/unauthorized-error';
 import { validateRequest } from '../../middlewares/validate-request';
 import { RequestAuthDto, ResponseAuthDto } from './dto/auth.dto';
 
@@ -17,7 +17,7 @@ router.post(
     //DBで認証
     const data = await User.findOne({ userName: userName, password: password });
     if (!data) {
-      throw new NotFoundError();
+      throw new UnauthorizedError();
     }
 
     const token = jwt.sign({ userName: userName }, 'secret', { expiresIn: '1h' });
